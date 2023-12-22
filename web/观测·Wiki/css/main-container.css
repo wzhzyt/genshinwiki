@@ -1,0 +1,534 @@
+.main-container {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 226px;
+}
+
+/* 右侧边栏 */
+.main-right {
+  float: right;
+  width: 340px;
+  display: block;
+  position: sticky;
+  top: 0;
+  background: none;
+}
+/* 公告栏 */
+.announcement-wrap {
+  position: relative;
+  height: 210px;
+}
+.announcement {
+  height: 100%;
+  background: url(../img/广告栏背景图.png) center center no-repeat;
+  background-color: #fff;
+  border-radius: 8px;
+  background-size: 96% auto;
+  position: relative;
+}
+.announcement-title {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  position: absolute;
+  top: 26px;
+  left: 0px;
+  box-sizing: border-box;
+}
+
+.announcement-content {
+  padding-right: 2%;
+  font-size: 14px;
+  position: absolute;
+  top: 46px;
+  bottom: 20px;
+  width: 86%;
+  left: 7%;
+  line-height: 1.36;
+  padding-top: 8px;
+  overflow-y: auto;
+  word-break: break-all;
+  height: auto;
+  box-sizing: border-box;
+}
+.announcement-content p {
+  white-space: pre-wrap;
+}
+
+/* 更多内容 */
+.read-more-btn {
+  margin-top: 20px;
+  width: 340px;
+  color: #f4d8a8;
+  font-size: 17px;
+  padding-left: 20px;
+  line-height: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: url(../img/更多内容-right箭头.png) 95% center no-repeat;
+  background-color: #2d2f33;
+  box-sizing: border-box;
+  background-size: 7px;
+  cursor: pointer;
+}
+/* 右侧模块通用外壳模板 */
+.main-right > .right-module-wrap {
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+/* 右侧模块通用内容模板 */
+.right-content-module {
+  margin-right: -10px;
+  overflow: hidden;
+  margin-top: -10px;
+}
+/* 右侧限时祈愿 */
+.pray-wrap {
+  margin-bottom: -10px;
+  margin-top: 10px;
+}
+.pray-wrap li {
+  background: #f5f5f5;
+  border-radius: 3px;
+  margin-bottom: 12px;
+  padding: 12px 13.5px;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+}
+.pray-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0;
+}
+
+.pray-top-title {
+  width: 80%;
+}
+.pray-top-title h2 {
+  font-size: 14px;
+  color: #333;
+  line-height: 14px;
+  margin-bottom: 8px;
+}
+.pray-top-title p {
+  font-size: 12px;
+  color: #a6a6a6;
+  line-height: 12px;
+}
+.pray-top-voice-wrap {
+  position: relative;
+  margin-top: 6px;
+}
+.pray-top-voice-wrap img {
+  width: 40px;
+  height: 40px;
+  background-image: url(../img/祈愿人物背景图.png);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: 9px 19px;
+  position: absolute;
+  left: -8px;
+  top: -18px;
+}
+.pray-top-audio-wrap {
+  background: #f0ece8;
+  border-radius: 13px;
+  border: 1px solid #e0dad3;
+  display: flex;
+  width: 48px;
+  height: 22px;
+  box-sizing: border-box;
+  justify-content: flex-end;
+}
+.pray-top-audio-wrap:hover {
+  background: #e0dad3;
+}
+
+.pray-top-audio {
+  padding: 3px 6px;
+}
+
+.pray-top-voice {
+  width: 16px;
+  height: 16px;
+  background: url(../img/audio播放器.png) 0 0 no-repeat;
+  background-size: cover;
+}
+.pray-top-title .timer span {
+  color: #967c68;
+  font-weight: bold;
+}
+
+/* 底部证件照部分 */
+.pray-bottom {
+  margin: 12px -9px 0 0;
+  font-size: 0;
+  margin-left: 2.5px;
+}
+.pray-bottom a {
+  display: inline-block;
+}
+.pray-bottom img {
+  width: 60px;
+  height: 60px;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+/* 回到顶部 */
+.main-right .back-top{
+  width: 80px;
+  height: 80px;
+  background: white ;
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: center;
+  color: #a6a6a6;
+  line-height: 14px;
+  margin-top: 20px;
+  padding-top: 9px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.main-right .back-top img{
+  margin: 0 auto 3px;
+  display: block;
+  height: 40px;
+  width: 40px;
+}
+/* 轮播图 */
+.swiper {
+  margin-top: 30px;
+  padding: 0;
+  width: 840px;
+  height: 210px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.swiper {
+  --swiper-theme-color: white; /* 设置Swiper风格 */
+  --swiper-navigation-color: transparent; /* 单独设置按钮颜色 */
+  --swiper-navigation-size: 20px; /* 设置按钮大小 */
+}
+.prev,
+.next {
+  display: block;
+  width: 50px;
+  height: 50px;
+  top: 45%;
+  opacity: 0;
+  transition: all 0.3s;
+}
+.prev {
+  background: url(../img/index-left.png) center/cover no-repeat;
+}
+.next {
+  background: url(../img/index-right.png) center/cover no-repeat;
+}
+.swiper:hover .prev,
+.swiper:hover .next {
+  opacity: 1;
+}
+.swiper-pagination {
+  left: 42%;
+  padding-right: 0;
+  bottom: 12px;
+  text-align: center;
+}
+.swiper-pagination-bullet {
+  margin: 0 4px;
+  background-color: white;
+  opacity: 1;
+}
+.swiper-pagination .swiper-pagination-bullet-active {
+  width: 24px;
+  background: #b1968b;
+  border-radius: 5px;
+}
+
+.shortcuts-wrap,
+.calender-wrap {
+  display: inline-block;
+  background: #fff;
+  margin-top: 20px;
+  padding: 0 30px 38px;
+  width: 780px;
+  position: relative;
+  z-index: 20;
+  border-radius: 4px;
+}
+.shortcuts-wrap {
+  padding-bottom: 0px;
+}
+.calender-wrap {
+  margin-top: 0px;
+}
+.shortcuts,
+.calender {
+  width: 100%;
+  margin-top: 40px;
+}
+.icon-title {
+  margin-bottom: 12px;
+  min-height: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: bold;
+}
+h3,
+.more-right {
+  display: flex;
+  align-items: center;
+}
+.icon-title .main-right {
+  font-weight: 400;
+}
+/* 更多内容 */
+.more-right a {
+  position: relative;
+  margin-left: auto;
+  font-size: 11px;
+  padding-right: 11px;
+  background: url(../img/more-right.png) no-repeat right center;
+  background-size: auto 11px;
+  color: #b1968b;
+  font-weight: 400;
+}
+.icon-title img {
+  margin-right: 4px;
+  width: 28px;
+  height: 28px;
+  margin: 0 4px 0 -4px;
+}
+.shortcuts-content {
+  position: relative;
+  margin-right: -12px;
+}
+.shortcuts-content ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -20px;
+}
+.shortcuts-content li {
+  width: 186px !important;
+  margin-right: 12px;
+  margin-bottom: 20px;
+  transition: all 0.1s;
+  position: relative;
+}
+.shortcuts-content .img-wrap {
+  height: 48px;
+  width: 186px;
+  margin: 0 auto;
+  position: relative;
+}
+.shortcuts-content img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.shortcuts-content img:nth-of-type(2) {
+  z-index: -1;
+}
+/* 移入换图图片变大 */
+.shortcuts-content li:hover img:nth-of-type(1) {
+  opacity: 0;
+}
+.shortcuts-content li:hover img {
+  transform: scale(1.045, 1.045);
+}
+/* 日历部分 */
+.calender-top-today {
+  padding: 0 12px 0 10px;
+  height: 40px;
+  line-height: 40px;
+  background: #fbfbfb;
+  border-radius: 3px;
+  border: 1px solid #f4f4f4;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.calender-top-today img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-top: -4px;
+}
+.calender-top .cal {
+  margin-top: 10px;
+}
+.calender-time {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+}
+.month {
+  background: url(../img/month背景图.png) center/cover no-repeat;
+  font-size: 24px;
+  font-weight: bold;
+  color: #b59b90;
+  width: 101px;
+  text-align: center;
+  line-height: 60px;
+  cursor: pointer;
+}
+.calender-time li {
+  margin-right: 5px;
+}
+
+/* 选中后面所有兄弟 */
+.month ~ li {
+  background: #f4f4f4;
+  height: 60px;
+  width: 0px;
+  flex-grow: 1;
+  text-align: center;
+  cursor: pointer;
+}
+.calender-time li:nth-of-type(6){
+  background: url(../img/day背景图.png) center/contain no-repeat;
+}
+.calender-time .day {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #a9a9a9;
+  line-height: 16px;
+}
+.calender-time .date {
+  font-weight: bold;
+  margin-top: 6px;
+  line-height: 22px;
+  color: #a9a9a9;
+  font-size: 17px;
+}
+.calender-bottom > ul > li {
+  margin: 5px -5px 0 0;
+  height: 125px;
+  display: flex;
+}
+.calender-bottom .cal-left {
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #f4f4f4;
+  background: #fbfbfb;
+  width: 100px;
+  border-radius: 3px;
+  margin-right: 5px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cal-right {
+  display: flex;
+  align-items: center;
+}
+.cal-prev,
+.cal-next {
+  margin: 0 5px 0 1px;
+  width: 28px;
+  height: 28px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.cal-prev {
+  background-image: url(../img/cal-toleft.浅色.png);
+}
+.cal-next {
+  background-image: url(../img/cal-toright.深色.png);
+}
+/* 日历证件照部分 */
+.cal-ID-Photo-wrap{
+  overflow: hidden;
+}
+.cal-ID-Photo {
+  align-items: center;
+  display: flex;
+  flex-grow: 0;
+  width: 607px;
+  position: relative;
+  transition: all .5s;
+}
+.cal-ID-Photo > li {
+  margin-left: 10px;
+  width: 60px;
+}
+.cal-ID-Photo > li:nth-of-type(1) {
+  margin-left: 0px;
+}
+.cal-ID-Photo a img {
+  width: 60px;
+  height: 60px;
+  border-radius: 3px;
+  background: #f5f5f5;
+}
+.cal-ID-Photo a .name {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #333;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+/* 限时活动 */
+.activity {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.activity li > a {
+  height: 60px;
+  display: block;
+  margin: 5px 10px 0 0;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+.activity li:nth-of-type(1) > a {
+  background: rgb(197, 243, 255) none repeat scroll 0% 0%;
+  color: rgb(16, 63, 86);
+  margin-top: 0;
+}
+
+.activity li:nth-of-type(2) > a {
+  background: rgb(214, 175, 237) none repeat scroll 0% 0%;
+  color: rgb(43, 7, 75);
+}
+.activity li:nth-of-type(3) > a {
+  float: right;
+  background: #fbd2d2;
+  color: #880c0c;
+  width: 70%;
+}
+.activity a img {
+  height: 40px;
+  margin-right: 9px;
+}
+.activity .introduce .title {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 14px;
+}
+.activity .introduce .time {
+  font-size: 12px;
+  line-height: 14px;
+  margin-top: 8px;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Table</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="../观测·Wiki/css/style.css">
+    <style>
+        /* 在这里写入CSS代码 */
+        body {
+            background-image: url('../观测·Wiki/img/芙宁娜.jpg');
+            background-size: cover; /* 背景图片覆盖整个页面 */
+            background-repeat: no-repeat; /* 背景图片不重复 */
+            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+            background-position: center center; /* 背景图片居中 */
+        }
+    </style>
+    <style>
+        #characterImageContainer img {
+            max-width: 100%; /* 设置最大宽度为父容器宽度的100% */
+            max-height: 1500px; /* 设置最大高度为300像素 */
+        }
+    </style>
+</head>
+<body>
+
+<h2>Character Details</h2>
+
+<div id="mw-content-text1">
+    <div id="characterImageContainer">
+        <!-- 图片将显示在这里 -->
+    </div>
+</div>
+
+<script>
+    // 获取URL中的参数
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    // 获取name参数的值
+    var characterName = getParameterByName('name');
+
+    // 在控制台打印name参数的值
+    console.log('Character Name:', characterName);
+
+    // 构建图片路径
+    var imagePath = '../观测·Wiki/img/character_map/'+ characterName + '.jpg';
+
+    // 在页面中显示name.jpg
+    var characterImageContainer = document.getElementById('characterImageContainer');
+    var imgElement = document.createElement('img');
+    imgElement.src = imagePath;
+    imgElement.alt = 'Character Image';
+    characterImageContainer.appendChild(imgElement);
+</script>
+</body>
+</html>

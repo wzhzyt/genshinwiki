@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User and Character List</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="../观测·Wiki/css/style.css">
+    <style>
+        /* 在这里写入CSS代码 */
+        body {
+            background-image: url('../观测·Wiki/img/芙宁娜.jpg');
+            background-size: cover; /* 背景图片覆盖整个页面 */
+            background-repeat: no-repeat; /* 背景图片不重复 */
+            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+            background-position: center center; /* 背景图片居中 */
+        }
+    </style>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        .active {
+            background-color: #66574A;
+        }
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><a href="../管理员界面/Admin.html">管理员首页</a></li>
+    <li><a class="active" href="../管理员界面/AdminAccountManagement.html?action=Admin">管理员账户管理</a></li>
+    <li><a href="../管理员界面/AdminCharacterManagement.html?action=Character">角色管理</a></li>
+    <li><a href="../管理员界面/add_picture.html">添加图片</a></li>
+</ul>
+<h2>User List</h2>
+<ul id="userList"></ul>
+<div id="mw-content-text1">
+    <table id="UserForm" style="margin-left: auto; margin-right: auto;border:  3px solid black; width: 80%;">
+        <thead>
+        <tr>
+            <th style="border: 1px solid black;">User ID</th>
+            <th style="border: 1px solid black;">User Name</th>
+            <th style="border: 1px solid black;">PassWord</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Data will be dynamically added here -->
+        </tbody>
+    </table>
+    <h2>Modify User</h2>
+    <form id="modifyUserForm">
+        <label for="modifyUserId">User ID:</label>
+        <input type="text" id="modifyUserId" name="UserId" required><br>
+        <label for="modifyPassWord">PassWord:</label>
+        <input type="text" id="modifyPassWord" name="PassWord" required><br>
+        <!-- Add other fields as needed -->
+
+        <button type="button" onclick="modifyUser()">Modify User</button><br>
+    </form>
+
+    <h2>Add User</h2>
+    <form id="addUserForm">
+        <label for="addUserId">User ID:</label>
+        <input type="text" id="addUserId" name="UserId" required><br>
+        <label for="addUserName">User Name:</label>
+        <input type="text" id="addUserName" name="UserName" required><br>
+        <label for="addPassWord">PassWord:</label>
+        <input type="text" id="addPassWord" name="PassWord" required><br>
+        <!-- Add other fields as needed -->
+
+        <button type="button" onclick="addUser()">Add User</button><br>
+    </form>
+
+    <h2>Remove User</h2>
+    <form id="removeUserForm">
+        <label for="removeUserId">User ID:</label>
+        <input type="text" id="removeUserId" name="UserId" required><br>
+        <!-- Add other fields as needed -->
+
+        <button type="button" onclick="removeUser()">Remove User</button><br>
+    </form>
+</div>
+
+
+<script>
+    // 使用AJAX请求获取数据
+    function fetchData(action, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+                console.log(xhr.responseText.length);
+                var data = JSON.parse(xhr.responseText);
+                callback(data);
+            }
+        };
+        xhr.open("GET", "/GenshinWIKI_web_war_exploded/AdminServlet?action=" + action, true);
+        xhr.send();
+    }
+
+    // 显示User列表
+    function showUserList() {
+        var tableBody = $('#UserForm tbody');
+        tableBody.empty();
+        fetchData("Admin", function (userList) {
+            var userListElement = document.getElementById("userList");
+            userListElement.innerHTML = "";
+            userList.forEach(function (user) {
+                var row = '<tr>' +
+                    '<td style="border: 1px solid black;">' + user.userId + '</td>' +
+                    '<td style="border: 1px solid black;">' + user.userName + '</td>' +
+                    '<td style="border: 1px solid black;">' + user.passWord + '</td>' +
+
+                    '</tr>';
+                tableBody.append(row);
+
+            });
+        });
+    }
+
+    // 初始化页面时调用
+    showUserList();
+
+    // 修改Admin
+    function modifyUser() {
+        var UserId = document.getElementById("modifyUserId").value;
+        var PassWord = document.getElementById("modifyPassWord").value;
+
+        // Use AJAX to send data to the server for modification
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle the response, if needed
+                // You can update the UI or show a message to the user
+                showUserList(); // Update the admin list after modification
+            }
+        };
+        xhr.open("POST", "/GenshinWIKI_web_war_exploded/AdminServlet", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("action=modify_admin&UserId=" + UserId + "&PassWord=" + PassWord);
+        // Add other fields to the request, if needed
+    }
+
+    // 添加Admin
+    function addUser() {
+        var UserId = encodeURIComponent(document.getElementById("addUserId").value);
+        var UserName = encodeURIComponent(document.getElementById("addUserName").value);
+        var PassWord = encodeURIComponent(document.getElementById("addPassWord").value);
+
+
+        // Use AJAX to send data to the server for addition
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle the response, if needed
+                // You can update the UI or show a message to the user
+                showUserList(); // Update the admin list after addition
+            }
+        };
+        xhr.open("POST", "/GenshinWIKI_web_war_exploded/AdminServlet", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        xhr.send("action=add_admin&UserId=" + UserId + "&UserName=" + UserName + "&PassWord=" + PassWord);
+        // Add other fields to the request, if needed
+    }
+
+    // 删除Admin
+    function removeUser() {
+        var UserId = document.getElementById("removeUserId").value;
+
+        // Use AJAX to send data to the server for removal
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle the response, if needed
+                // You can update the UI or show a message to the user
+                showUserList(); // Update the admin list after removal
+            }
+        };
+        xhr.open("POST", "/GenshinWIKI_web_war_exploded/AdminServlet", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("action=remove_admin&UserId=" + UserId);
+        // Add other fields to the request, if needed
+    }
+</script>
+
+</body>
+</html>
+

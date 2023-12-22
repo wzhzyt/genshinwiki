@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="../观测·Wiki/css/style.css">
+
+    <style>
+        /* 在这里写入CSS代码 */
+        body {
+            background-image: url('../观测·Wiki/img/芙宁娜.jpg');
+            background-size: cover; /* 背景图片覆盖整个页面 */
+            background-repeat: no-repeat; /* 背景图片不重复 */
+            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+            background-position: center center; /* 背景图片居中 */
+        }
+    </style>
+    <style>
+        .guide {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .guide .active {
+            background-color: #66574A;
+        }
+
+        .guide li {
+            float: left;
+        }
+
+        .guide li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .guide li a:hover {
+            background-color: #111;
+        }
+    </style>
+
+</head>
+<body>
+<ul class="guide">
+    <li><a class="active" href="../管理员界面/Admin.html">管理员首页</a></li>
+    <li><a href="../管理员界面/AdminAccountManagement.html?action=Admin">管理员账户管理</a></li>
+    <li><a  href="../管理员界面/AdminCharacterManagement.html?action=Character">角色管理</a></li>
+    <li><a href="../管理员界面/add_picture.html">添加图片</a></li>
+    <li><a href="../index.jsp">退出登录</a></li>
+</ul>
+<div>
+    <h2>Options:</h2>
+    <ul>
+        <li><a href="AdminAccountManagement.html?action=Admin">管理员账户管理</a></li>
+        <li><a href="AdminCharacterManagement.html?action=Character">角色管理</a></li>
+        <li><a href="add_picture.html">添加图片</a> </li>
+    </ul>
+</div>
+</body>
+</html>

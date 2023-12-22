@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Table</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="../观测·Wiki/css/style.css">
+    <style>
+        /* 在这里写入CSS代码 */
+        body {
+            background-image: url('../观测·Wiki/img/芙宁娜.jpg');
+            background-size: cover; /* 背景图片覆盖整个页面 */
+            background-repeat: no-repeat; /* 背景图片不重复 */
+            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+            background-position: center center; /* 背景图片居中 */
+        }
+    </style>
+</head>
+<body>
+
+<h2>Character Table</h2>
+
+<div id="mw-content-text1">
+    <table id="characterTable" style="margin-left: auto; margin-right: auto;">
+    <thead>
+    <tr>
+        <th>Icon</th>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>元素</th>
+        <th>武器</th>
+        <th>星级</th>
+        <th>国家</th>
+
+    </tr>
+    <tr>
+        <th></th>
+        <th></th>
+        <th><select id="filterName"class="select-style"><option value="">筛选姓名...</option></select></th>
+        <th><select id="filterElement"class="select-style"><option value="">筛选元素...</option></select></th>
+        <th><select id="filterWeapon"class="select-style"><option value="">筛选武器...</option></select></th>
+        <th><select id="filterRank"class="select-style"><option value="">筛选星级...</option></select></th>
+        <th><select id="filterRegion"class="select-style"><option value="">筛选国家...</option></select></th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Data will be dynamically added here -->
+    </tbody>
+</table>
+</div>
+<script>
+    // Function to fetch character data from UserServlet
+    function fetchCharacterData() {
+        $.ajax({
+            url: '/GenshinWIKI_web_war_exploded/UserServlet', // Make sure this is the correct URL
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // Populate the table with data
+                populateCharacterTable(data);
+            },
+            error: function(error) {
+                console.error('Error fetching character data:', error);
+            }
+        });
+    }
+
+    // Function to populate the character table with data
+    function populateCharacterTable(data) {
+        var tableBody = $('#characterTable tbody');
+        tableBody.empty();
+        var names = new Set();
+        var elements = new Set();
+        var weapons = new Set();
+        var ranks = new Set();
+        var regions = new Set();
+        data.forEach(function(character) {
+            // Extract the 'avatar' value
+            var match = character.icon.match(/"avatar": "([^"]+)"/);
+            var avatarText = match ? match[1] : ''; // Extracted 'avatar' value
+            var avatarImage = '<img src="../观测·Wiki/img/avatar/'+ avatarText+'.png" alt="' + avatarText + '" width="100" height="100">';
+
+            var row = '<tr>' +
+                '<td>' + avatarImage + '</td>' +
+                '<td>' + character.id + '</td>' +
+                '<td>' + character.name + '</td>' +
+                '<td>' + character.element + '</td>' +
+                '<td>' + character.weapon + '</td>' +
+                '<td>' + character.rank + '</td>' +
+                '<td>' + character.region + '</td>' +
+                '</tr>';
+            tableBody.append(row);
+            // 更新下拉列表的选项集合
+            names.add(character.name);
+            elements.add(character.element);
+            weapons.add(character.weapon);
+            ranks.add(character.rank);
+            regions.add(character.region);
+        });
+        // 更新下拉列表的选项
+        updateFilterOptions('#filterName', names);
+        updateFilterOptions('#filterElement', elements);
+        updateFilterOptions('#filterWeapon', weapons);
+        updateFilterOptions('#filterRank', ranks);
+        updateFilterOptions('#filterRegion', regions);
+
+        filterTable(); // 筛选表格以应用初始筛选条件
+    }
+
+    $(document).ready(function() {
+        fetchCharacterData();
+    });
+
+    function updateFilterOptions(selector, options) {
+        var select = $(selector);
+        select.find('option:gt(0)').remove(); // 移除旧的选项，保留第一个选项
+
+        options.forEach(function(option) {
+            select.append($('<option>', { value: option, text: option }));
+        });
+    }
+
+    function filterTable() {
+        var inputName = $('#filterName').val().toLowerCase();
+        var inputElement = $('#filterElement').val().toLowerCase();
+        var inputWeapon = $('#filterWeapon').val().toLowerCase();
+        var inputRank = $('#filterRank').val().toLowerCase();
+        var inputRegion = $('#filterRegion').val().toLowerCase();
+
+        // ... 现有的筛选逻辑 ...
+        var inputName = $('#filterName').val().toLowerCase();
+        var inputElement = $('#filterElement').val().toLowerCase();
+        var inputWeapon = $('#filterWeapon').val().toLowerCase();
+        var inputRank = $('#filterRank').val().toLowerCase();
+        var inputRegion = $('#filterRegion').val().toLowerCase();
+
+        $('#characterTable tbody tr').filter(function() {
+            $(this).toggle($(this).find('td').eq(2).text().toLowerCase().indexOf(inputName) > -1 &&
+                $(this).find('td').eq(3).text().toLowerCase().indexOf(inputElement) > -1 &&
+                $(this).find('td').eq(4).text().toLowerCase().indexOf(inputWeapon) > -1 &&
+                $(this).find('td').eq(5).text().toLowerCase().indexOf(inputRank) > -1 &&
+                $(this).find('td').eq(6).text().toLowerCase().indexOf(inputRegion) > -1);
+        });
+    }
+
+    // 绑定下拉列表的 'change' 事件到筛选函数
+    $(document).ready(function() {
+        $('#filterName, #filterElement, #filterWeapon, #filterRank, #filterRegion').on('change', filterTable);
+        fetchCharacterData();
+    });
+</script>
+
+</body>
+</html>

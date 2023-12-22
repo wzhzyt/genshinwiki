@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Table</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="../观测·Wiki/css/style.css">
+    <style>
+        /* <ul><li><a   id="userTeam_add_characterLink" href="#">添加角色</a></li></ul> */
+        /* 在这里写入CSS代码 */
+        body {
+            background-image: url('../观测·Wiki/img/芙宁娜.jpg');
+            background-size: cover; /* 背景图片覆盖整个页面 */
+            background-repeat: no-repeat; /* 背景图片不重复 */
+            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+            background-position: center center; /* 背景图片居中 */
+        }
+    </style>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        .active {
+            background-color: #66574A;
+        }
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+
+<ul>
+    <li><a   id="returnLink" href="#">返回主站</a></li>
+    <li><a   id="userTeam_add_characterLink" href="#">编辑我的角色</a></li>
+</ul>
+
+<div id="mw-content-text1">
+    <table id="teamTable" style="margin-left: auto; margin-right: auto;">
+        <thead>
+        <tr>
+            <th>TeamId</th>
+            <th>成员 1</th>
+            <th>成员 2</th>
+            <th>成员 3</th>
+            <th>成员 4</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Data will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <button id="userTeam_addLink">添加队伍</button>
+    <button id="userTeamLink">修改队伍</button>
+    <button id="userTeam_deleteLink">删除队伍</button>
+
+</div>
+
+
+<script>
+    var characterDict = {};
+    function fetchCharacterData() {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/GenshinWIKI_web_war_exploded/UserServlet', // 修改为正确的 URL
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    data.forEach(function(character) {
+                        var avatarText = character.icon
+                        characterDict[character.name] = avatarText;
+                    });
+                    resolve(); // 数据加载完成，解决 Promise
+                },
+                error: function(error) {
+                    reject(error); // 发生错误，拒绝 Promise
+                }
+            });
+        });
+    }
+    $(document).ready(function() {
+        // 获取 userId 参数
+        var params = new URLSearchParams(window.location.search);
+        var userId = params.get('userId');
+        fetchCharacterData().then(() => {
+            // 数据加载完成，执行需要这些数据的操作
+            if (userId) {
+                // 发送 AJAX 请求到 UserTeamServlet
+                $.ajax({
+                    url: '/GenshinWIKI_web_war_exploded/UserTeamServlet', // Servlet 的 URL
+                    type: 'GET',
+                    data: {UserId: userId}, // 将 userId 作为参数发送
+                    success: function(teamList) {
+                        // 处理响应
+                        displayTeamTable(teamList);
+                    },
+                    error: function() {
+                        $('#teamListContainer').html('加载数据时发生错误。');
+                    }
+                });
+            } else {
+                $('#teamListContainer').html('未提供 userId。');
+            }
+        }).catch((error) => {
+        });
+        // 检查 userId 是否存在
+
+    });
+
+    $(document).ready(function() {
+        // 获取 userId 参数
+        var params = new URLSearchParams(window.location.search);
+        var userId = params.get('userId');
+        var returnLink = document.getElementById("returnLink");
+        returnLink.href = "../观测·Wiki/Wiki.html?userId=" + userId;
+
+        // 检查 userId 是否存在
+        if (userId) {
+            // 发送 AJAX 请求到 UserTeamServlet
+            $.ajax({
+                url: '/GenshinWIKI_web_war_exploded/UserTeamServlet', // Servlet 的 URL
+                type: 'GET',
+                data: {UserId: userId}, // 将 userId 作为参数发送
+                success: function(teamList) {
+                    // 处理响应
+                    displayTeamTable(teamList);
+                },
+                error: function() {
+                    $('#teamListContainer').html('加载数据时发生错误。');
+                }
+            });
+        } else {
+            alert('请登录');
+            window.location.href = '../首页/User_login.html';
+        }
+    });
+
+    // 函数：展示团队列表
+
+    function displayTeamTable(teamList) {
+        var tableBody = $('#teamTable tbody');
+        tableBody.empty();
+        var team_id = new Set();
+        var member1 = new Set();
+        var member2 = new Set();
+        var member3 = new Set();
+        var member4 = new Set();
+        teamList.forEach(function(item) {
+            // Extract the 'avatar' value
+            var userteam = item.team;
+            var p1 = userteam.member1;
+            p1 = characterDict[p1] || p1;
+            var p2 = userteam.member2;
+            p2 = characterDict[p2] || p2;
+            var p3 = userteam.member3;
+            p3 = characterDict[p3] || p3;
+            var p4 = userteam.member4;
+            p4 = characterDict[p4] || p4;
+            var Image1 = '<img src="../观测·Wiki/img/avatar/'+ p1+'.png" alt="' + p1 + '" width="100" height="100">';
+            var Image2 = '<img src="../观测·Wiki/img/avatar/'+ p2+'.png" alt="' + p2 + '" width="100" height="100">';
+            var Image3 = '<img src="../观测·Wiki/img/avatar/'+ p3+'.png" alt="' + p3 + '" width="100" height="100">';
+            var Image4 = '<img src="../观测·Wiki/img/avatar/'+ p4+'.png" alt="' + p4 + '" width="100" height="100">';
+            var row = '<tr>' +
+                '<td>' + userteam.team_id + '</td>' +
+                '<td>' + Image1 + '</td>' +
+                '<td>' + Image2 + '</td>' +
+                '<td>' + Image3 + '</td>' +
+                '<td>' + Image4 + '</td>' +
+                '</tr>';
+            tableBody.append(row);
+         });
+    }
+
+    // 添加或修改操作后重新获取并显示团队列表
+</script>
+<script>
+    $(document).ready(function() {
+    var params = new URLSearchParams(window.location.search);
+    var userId = params.get('userId');
+    // 添加角色表单提交
+    $('#addCharacterForm').on('submit', function(e) {
+        e.preventDefault();
+        var formData = $(this).serialize() + '&UserId=' + userId;
+        $.ajax({
+            url: '/GenshinWIKI_web_war_exploded/UserTeamServlet',
+            type: 'POST',
+            data: formData + '&action=add_character',
+            success: function(response) {
+                // 处理成功响应
+            },
+            error: function() {
+                // 处理错误响应
+            }
+        });
+    });
+});
+
+</script>
+<script>
+    var params = new URLSearchParams(window.location.search);
+    var userId = params.get('userId');
+    // 添加点击事件监听器
+    var userTeam_addLink = document.getElementById('userTeam_addLink');
+    userTeam_addLink.addEventListener('click', function() {
+        if (userId) {
+            window.location.href = `UserTeam_add.html?userId=${userId}`;
+        } else {
+            window.location.href = "UserTeam_add.html";
+        }
+    });
+    var userTeamLink = document.getElementById('userTeamLink');
+    userTeamLink.addEventListener('click', function() {
+        if (userId) {
+            window.location.href = `UserTeam_modify.html?userId=${userId}`;
+        } else {
+            window.location.href = "UserTeam_modify.html";
+        }
+    });
+    var userTeam_deleteLink = document.getElementById('userTeam_deleteLink');
+    userTeam_deleteLink.addEventListener('click', function() {
+        if (userId) {
+            window.location.href = `UserTeam_delete.html?userId=${userId}`;
+        } else {
+            window.location.href = "UserTeam_delete.html";
+        }
+    });
+    var userTeam_add_character_Link = document.getElementById('userTeam_add_characterLink');
+    if (userId) {
+        var userTeam_add_characterLink = document.getElementById("userTeam_add_characterLink");
+        userTeam_add_characterLink.href = "UseraddCharacter.html?userId=" + userId;
+    } else {
+        var userTeam_add_characterLink = document.getElementById("userTeam_add_characterLink");
+        userTeam_add_characterLink.href = "UseraddCharacter.html" ;
+    }
+
+    $(document).ready(function() {
+        fetchCharacterData();
+        var params = new URLSearchParams(window.location.search);
+        var userId = params.get('userId');
+
+
+        $('#addCharacterForm').on('submit', function(e) {
+            e.preventDefault();
+            var formDataArray = $(this).serializeArray();
+            formDataArray.forEach(function(field) {
+                // 根据输入框的 name 属性进行匹配和转换
+                if (field.name === 'member1' || field.name === 'member2' || field.name === 'member3' || field.name === 'member4') {
+                    field.value = characterDict[field.value] || field.value;
+                }
+            });
+            formDataArray.push({ name: "UserId", value: userId });
+            var formData = $.param(formDataArray); // 将数组转换为查询字符串
+            $.ajax({
+                url: '/GenshinWIKI_web_war_exploded/UserTeamServlet',
+                type: 'POST',
+                data: formData + '&action=add_character',
+            }).always(function() {
+                // 无论成功或失败，都执行跳转
+                window.location.href = `UserTeam.html?userId=${userId}`;
+            });
+        });
+    });
+</script>
+</body>
+</html>

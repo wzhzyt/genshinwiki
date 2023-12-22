@@ -1,0 +1,174 @@
+body{
+  font-family: -apple-system, Segoe UI, Helvetica Neue, Helvetica, Arial, PingFang SC, 'Microsoft YaHei', 微软雅黑, 'MicrosoftJhengHei', 华文细黑, STHeiti, MingLiu, sans-serif;
+  word-spacing: 1px;
+}
+/* 背景图 */
+
+.background-image {
+  background-image: url(../img/诗夏远海游记.png);
+  position: fixed;
+  top: 0;
+  height: 600px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center top;
+  animation: change 15s linear infinite;
+  transition: all 1s;
+}
+@keyframes change {
+  0% {
+    background-image: url(../img/诗夏远海游记.png);
+  }
+  50% {
+    background-image: url(../img/千朵玫瑰带来的黎明.png);
+  }
+  100% {
+    background-image: url(../img/诗夏远海游记.png);
+  }
+}
+.container .logo-wrap {
+  width: 1200px;
+  margin: 0 auto;
+}
+.logo-wrap img {
+  position: relative;
+  top: 100px;
+  display: block;
+  width: 300px;
+  height: 130px;
+}
+/* 顶部导航 */
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+header {
+  line-height: 60px;
+  /* background-color: #2d2f33; */
+  color: #fff;
+  font-size: 0;
+  width: 100%;
+  min-width: 1200px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+.header-content {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+}
+.mhy-logo {
+  display: inline-block;
+}
+.mhy-logo > a {
+  display: inline-block;
+  height: 60px;
+  cursor: pointer;
+  vertical-align: top;
+}
+.mhy-logo > a > img {
+  width: 90px;
+  vertical-align: middle;
+}
+.mhy-title {
+  display: inline-block;
+  padding-left: 10px;
+  margin-left: 10px;
+  position: relative;
+  vertical-align: top;
+  width: 170px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+}
+.mhy-title::before {
+  content: "";
+  height: 15px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  position: absolute;
+  top: 24px;
+  left: 0px;
+}
+header .nav {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+}
+header .nav li {
+  float: left;
+}
+header .nav li:nth-of-type(1) {
+  font-size: 16px;
+  color: #f4d8a8;
+  background: url(../img/header-nav.png) no-repeat center center;
+  background-size: auto 36px;
+  font-weight: bold;
+}
+.nav li > a {
+  color: inherit;
+  display: block;
+}
+header .nav li:nth-of-type(2) {
+  margin-left: 40px;
+}
+/* 导航栏右侧 */
+.header-right {
+  float: right;
+  display: flex;
+  font-size: 14px;
+}
+.header-search {
+  height: 30px;
+  margin-top: 16px;
+  line-height: 30px;
+  background-color: rgba(255, 255, 255, 0.22);
+  padding: 0 35px 0 15px;
+  border-radius: 15px;
+  position: relative;
+  margin-right: 15px;
+}
+
+.header-search > input {
+  background-color: transparent;
+  color: #fff;
+  width: 70px;
+  height: 30px;
+  outline: none;
+  transition: width 300ms ease;
+  font-size: 14px;
+}
+.header-search .icon-sousuo {
+  position: absolute;
+  right: 12px;
+  top: 0;
+  cursor: pointer;
+  align-self: center;
+  line-height: 30px;
+}
+.header-search > input:focus {
+  width: 100px;
+}
+.header-user{
+  position: relative;
+  cursor: pointer;
+}
+.user-wrap{
+  padding: 12px 20px;
+}
+.user-wrap:hover{
+  background-color: rgba(255, 255, 255, 0.22) ;
+}
+.user-wrap img {
+  display: block;
+  height: 32px;
+  width: 32px;
+  padding: 2px;
+  background-color: #fff;
+  border-radius: 50%;
+}

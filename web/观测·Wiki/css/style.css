@@ -1,0 +1,32 @@
+#mw-content-text1 {
+    padding: 5em 4em 5em 4em;
+    background: url(../img/image1.png) left top/118px no-repeat,
+    url(../img/image2.png) left top/45px no-repeat,
+    url(../img/image3.png) right top/45px no-repeat,
+    url(../img/image4.png) left bottom/45px no-repeat,
+    url(../img/image5.png) right bottom/45px no-repeat,
+    url(../img/image6.png) left top/45px repeat-x,
+    url(../img/image7.png) left bottom/45px repeat-x,
+    url(../img/image8.png) left top/19px repeat-y,
+    url(../img/image9.png) right top/19px repeat-y,
+    #F8F3EF;
+    border-radius: 6px;
+    color: #66574A;
+    line-height: 2.14285714;
+    max-width: 650px; /* 限制最大宽度 */
+    margin: 0 auto; /* 上下边距为0，左右自动，以居中容器 */
+}
+.select-style {
+    color: #66574A;        /* 文本颜色 */
+    background-color: #FFF;/* 背景颜色，这里设置为白色 */
+    border: 1px solid #66574A; /* 边框颜色和样式 */
+    border-radius: 5px;    /* 边框圆角 */
+    padding: 2px 4px;     /* 内边距：垂直方向5px，水平方向10px */
+    outline: none;         /* 移除轮廓 */
+}
+
+/* 当select获得焦点时的样式，可以根据需要调整 */
+.select-style:focus {
+    border-color: #66574A;
+    box-shadow: 0 0 5px 2px rgba(102, 87, 74, 0.2);
+}

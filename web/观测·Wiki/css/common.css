@@ -1,0 +1,10 @@
+.header{
+    background-color: #1f2233;
+    color: #ffffff;
+    font-size: 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+    line-height: 66px;
+}

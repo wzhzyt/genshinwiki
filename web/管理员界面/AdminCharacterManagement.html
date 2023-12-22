@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin and Character List</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="../观测·Wiki/css/style.css">
+
+    <style>
+        /* 在这里写入CSS代码 */
+        body {
+            background-image: url('../观测·Wiki/img/芙宁娜.jpg');
+            background-size: cover; /* 背景图片覆盖整个页面 */
+            background-repeat: no-repeat; /* 背景图片不重复 */
+            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+            background-position: center center; /* 背景图片居中 */
+        }
+    </style>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        .active {
+            background-color: #66574A;
+        }
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+
+<ul>
+    <li><a  href="../管理员界面/Admin.html">管理员首页</a></li>
+    <li><a href="../管理员界面/AdminAccountManagement.html?action=Admin">管理员账户管理</a></li>
+    <li><a class="active" href="../管理员界面/AdminCharacterManagement.html?action=Character">角色管理</a></li>
+    <li><a href="../管理员界面/add_picture.html">添加图片</a></li>
+
+</ul>
+
+<ul id="characterList"></ul>
+<div id="mw-content-text1">
+    <table id="characterTable" style="margin-left: auto; margin-right: auto;width: 80%;">
+        <thead>
+        <tr>
+            <th>Icon</th>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>元素</th>
+            <th>武器</th>
+            <th>星级</th>
+            <th>国家</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Data will be dynamically added here -->
+        </tbody>
+    </table>
+    <h2>Add Character</h2>
+    <form id="addCharacterForm">
+        <label for="addId">ID:</label>
+        <input type="text" id="addId" name="id" required><br>
+        <label for="addName">名称:</label>
+        <input type="text" id="addName" name="name" required><br>
+        <label for="addElement">元素:</label>
+        <input type="text" id="addElement" name="element" required><br>
+        <label for="addWeapon">武器:</label>
+        <input type="text" id="addWeapon" name="weapon" required><br>
+        <label for="addRank">等级:</label>
+        <input type="text" id="addRank" name="rank" required><br>
+        <label for="addRegion">地区:</label>
+        <input type="text" id="addRegion" name="region" required><br>
+        <label for="addIcon">图标:</label>
+        <input type="text" id="addIcon" name="icon" required><br>
+
+        <button type="button" onclick="addCharacter()">添加角色</button><br>
+    </form>
+
+    <h2>Remove Character</h2>
+    <form id="removeCharacterForm">
+        <label for="removeId">ID:</label>
+        <input type="text" id="removeId" name="id" required><br>
+
+        <button type="button" onclick="removeCharacter()">移除角色</button><br>
+    </form>
+
+    <h2>Modify Character</h2>
+    <form id="modifyCharacterForm">
+        <label for="modifyId">ID:</label>
+        <input type="text" id="modifyId" name="id" required><br>
+        <label for="modifyName">名称:</label>
+        <input type="text" id="modifyName" name="name" required><br>
+        <label for="modifyElement">元素:</label>
+        <input type="text" id="modifyElement" name="element" required><br>
+        <label for="modifyWeapon">武器:</label>
+        <input type="text" id="modifyWeapon" name="weapon" required><br>
+        <label for="modifyRank">等级:</label>
+        <input type="text" id="modifyRank" name="rank" required><br>
+        <label for="modifyRegion">地区:</label>
+        <input type="text" id="modifyRegion" name="region" required><br>
+        <label for="modifyIcon">图标:</label>
+        <input type="text" id="modifyIcon" name="icon" required><br>
+
+        <button type="button" onclick="modifyCharacter()">修改角色</button><br>
+    </form>
+</div>
+
+
+
+<script>
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    var action = getUrlParameter('action');
+    if (action) {
+        if (action === 'Character') {
+            showCharacterList();
+        }
+    }
+
+    function fetchData(action, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                callback(data);
+            }
+        };
+        xhr.open("GET", "/GenshinWIKI_web_war_exploded/AdminServlet?action=" + action, true);
+        xhr.send();
+    }
+
+    function showCharacterList() {
+        fetchData("Character", function (characterList) {
+            var tableBody = $('#characterTable tbody');
+            tableBody.empty();
+            var characterListElement = document.getElementById("characterList");
+            characterListElement.innerHTML = "";
+            characterList.forEach(function (character) {
+                var avatarText =  character.icon;
+                var avatarImage = '<img src="../观测·Wiki/img/avatar/'+ avatarText+'.png" alt="' + avatarText + '" width="100" height="100">';
+
+                var row = '<tr>' +
+                    '<td>' + avatarImage + '</td>' +
+                    '<td>' + character.id + '</td>' +
+                    '<td>' + character.name + '</td>' +
+                    '<td>' + character.element + '</td>' +
+                    '<td>' + character.weapon + '</td>' +
+                    '<td>' + character.rank + '</td>' +
+                    '<td>' + character.region + '</td>' +
+                    '</tr>';
+                tableBody.append(row);
+            });
+        });
+    }
+
+    function addCharacter() {
+        var id = document.getElementById("addId").value;
+        var name = document.getElementById("addName").value;
+        var element = document.getElementById("addElement").value;
+        var weapon = document.getElementById("addWeapon").value;
+        var rank = document.getElementById("addRank").value;
+        var region = document.getElementById("addRegion").value;
+        var icon = document.getElementById("addIcon").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                showCharacterList(); // 更新角色列表
+            }
+        };
+        xhr.open("POST", "/GenshinWIKI_web_war_exploded/AdminServlet", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        xhr.send("action=add_character&id=" + id + "&name=" + encodeURIComponent(name) + "&element=" + encodeURIComponent(element) + "&weapon=" + encodeURIComponent(weapon) + "&rank=" + rank + "&region=" + encodeURIComponent(region) + "&icon=" + encodeURIComponent(icon));
+    }
+
+    function removeCharacter() {
+        var id = document.getElementById("removeId").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                showCharacterList(); // 更新角色列表
+            }
+        };
+        xhr.open("POST", "/GenshinWIKI_web_war_exploded/AdminServlet", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        xhr.send("action=remove_character&id=" + id);
+    }
+
+    function modifyCharacter() {
+        var id = document.getElementById("modifyId").value;
+        var name = document.getElementById("modifyName").value;
+        var element = document.getElementById("modifyElement").value;
+        var weapon = document.getElementById("modifyWeapon").value;
+        var rank = document.getElementById("modifyRank").value;
+        var region = document.getElementById("modifyRegion").value;
+        var icon = document.getElementById("modifyIcon").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                showCharacterList(); // 更新角色列表
+            }
+        };
+        xhr.open("POST", "/GenshinWIKI_web_war_exploded/AdminServlet", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        xhr.send("action=modify_character&id=" + id + "&name=" + encodeURIComponent(name) + "&element=" + encodeURIComponent(element) + "&weapon=" + encodeURIComponent(weapon) + "&rank=" + rank + "&region=" + encodeURIComponent(region) + "&icon=" + encodeURIComponent(icon));
+    }
+</script>
+
+</body>
+</html>

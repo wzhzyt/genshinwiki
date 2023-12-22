@@ -1,0 +1,30 @@
+{
+  "id": "3530816",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "19491647",
+      "name": "sousuo",
+      "font_class": "sousuo",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "12011697",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e7b3",
+      "unicode_decimal": 59315
+    },
+    {
+      "icon_id": "109758",
+      "name": "lock",
+      "font_class": "lock",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Character Management</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="../观测·Wiki/css/style.css">
+    <style>
+        /* <ul><li><a   id="userTeam_add_characterLink" href="#">添加角色</a></li></ul> */
+        /* 在这里写入CSS代码 */
+        body {
+            background-image: url('../观测·Wiki/img/芙宁娜.jpg');
+            background-size: cover; /* 背景图片覆盖整个页面 */
+            background-repeat: no-repeat; /* 背景图片不重复 */
+            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+            background-position: center center; /* 背景图片居中 */
+        }
+    </style>
+    <style>
+        .guide {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .guide .active {
+            background-color: #66574A;
+        }
+
+        .guide li {
+            float: left;
+        }
+
+        .guide li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .guide li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+<ul class="guide">
+    <li><a   id="returnLink" href="#">返回主站</a></li>
+    <li><a   id="returnLink2" href="#">返回队伍列表</a></li>
+</ul>
+<div id="mw-content-text1">
+    <h2>用户角色管理</h2>
+
+    <!-- 添加角色表单 -->
+    <form id="addCharacterForm">
+        <label for="characterId">角色 ID：</label>
+        <input id="type" type="text"  list="typelist1" style='width:0px;height:0px ;background-color:transparent;border:0;'>
+        <input type="text" id="characterId" list="typelist1" name="characterId" required>
+        <datalist id="typelist1">
+
+        </datalist>
+        <button type="button" onclick="addCharacter()">添加角色</button><br>
+    </form>
+
+    <!-- 移除角色表单 -->
+    <form id="removeCharacterForm">
+        <label for="characterIdRemove">角色 ID：</label>
+        <input id="type" type="text"  list="typelist2" style='width:0px;height:0px ;background-color:transparent;border:0;'>
+        <input type="text" id="characterIdRemove" name="characterId" list="typelist2" required>
+        <datalist id="typelist2">
+
+        </datalist>
+        <button type="button" onclick="removeCharacter()">移除角色</button><br>
+    </form>
+
+    <!-- 显示用户角色 -->
+    <h3>用户角色：</h3>
+    <ul id="userCharacterList"></ul>
+    <table id="characterTable" style="margin-left: auto; margin-right: auto;">
+        <thead>
+        <tr>
+            <th>Icon</th>
+            <th>姓名</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Data will be dynamically added here -->
+        </tbody>
+    </table>
+</div>>
+
+
+<script>
+    var characterDict = {};
+    var characterDict2 = {};
+    // 添加角色的函数
+    function addCharacter() {
+        var userId = getUserIdFromUrl();
+        var characterId = document.getElementById("characterId").value;
+        characterId = characterDict[characterId] || characterId;
+        // 发送添加角色的 AJAX 请求
+        $.ajax({
+            url: '/GenshinWIKI_web_war_exploded/UserCharacterServlet', // 修改为正确的 URL
+            type: 'POST',
+            dataType: 'json',
+            data: {action:"add_characters", UserId: userId,characterId: characterId},
+
+            success: function(data) {
+                updateUserCharacterList(userId);
+            },
+            error: function(error) {
+            }
+        }).always(function() {
+            updateUserCharacterList(userId);
+        });
+    }
+    // 移除角色的函数
+    function removeCharacter() {
+        var userId = getUserIdFromUrl();
+        var characterId = document.getElementById("characterIdRemove").value;
+        characterId = characterDict[characterId] || characterId;
+        // 发送添加角色的 AJAX 请求
+        $.ajax({
+            url: '/GenshinWIKI_web_war_exploded/UserCharacterServlet', // 修改为正确的 URL
+            type: 'POST',
+            dataType: 'json',
+            data: {action:"remove_characters", UserId: userId,characterId: characterId},
+
+            success: function(data) {
+                updateUserCharacterList(userId);
+            },
+            error: function(error) {
+            }
+        }).always(function() {
+            updateUserCharacterList(userId);
+        });
+
+
+
+    }
+    // 获取并显示用户角色的函数
+    function updateUserCharacterList() {
+        var userId = getUserIdFromUrl();
+        console.log(userId);
+        $.ajax({
+            url: '/GenshinWIKI_web_war_exploded/UserCharacterServlet', // Make sure this is the correct URL
+            type: 'GET',
+            dataType: 'json',
+            data: {UserId: userId},
+            success: function(data) {
+                // Populate the table with data
+                console.log(data);  // 在控制台打印获取的数据
+                var typeList2 = $('#typelist2');
+                // 更新用户角色列表
+                // var userCharacterList = document.getElementById("userCharacterList");
+                // userCharacterList.innerHTML = "";
+                data.forEach(function (character) {
+                    typeList2.append('<option value="' + character.characterId + '">' + character.characterId + '</option>');
+                    // var listItem = document.createElement("li");
+                    // listItem.textContent = character.characterId;
+                    // userCharacterList.appendChild(listItem);
+                    populateCharacterTable(data);
+                });
+            },
+            error: function(error) {
+                console.error('Error fetching character data:', error);
+            }
+        });
+    }
+    function fetchCharacterData2() {
+        $.ajax({
+            url: '/GenshinWIKI_web_war_exploded/UserServlet', // 修改为正确的 URL
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                var typeList1 = $('#typelist1');
+                data.forEach(function(character) {
+                    typeList1.append('<option value="' + character.name + '">' + character.characterId + '</option>');
+                });
+            }
+        });
+    }
+    function fetchCharacterData() {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: '/GenshinWIKI_web_war_exploded/UserServlet', // 修改为正确的 URL
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    data.forEach(function(character) {
+                        characterDict[character.name] = character.id;
+                        characterDict2[character.name] = character.icon;
+                    });
+                    resolve();
+                }
+            });
+        });
+    }
+    function populateCharacterTable(data) {
+        var tableBody = $('#characterTable tbody');
+        tableBody.empty();
+        data.forEach(function(character) {
+            // Extract the 'avatar' value
+            var avatarText = character.characterId
+            avatarText = characterDict2[avatarText] || avatarText;
+            var avatarImage = '<img src="../观测·Wiki/img/avatar/'+ avatarText+'.png" alt="' + avatarText + '" width="100" height="100">';
+
+            var row = '<tr>' +
+                '<td>' + avatarImage + '</td>' +
+                '<td>' + character.characterId + '</td>' +
+                '</tr>';
+            tableBody.append(row);
+        });
+
+    }
+    function getUserIdFromUrl() {
+        var params = new URLSearchParams(window.location.search);
+        return params.get('userId');
+    }
+    $(document).ready(function() {
+        fetchCharacterData().then(() => {
+            // 数据加载完成，执行需要这些数据的操作
+            updateUserCharacterList();
+            fetchCharacterData2()
+            var params = new URLSearchParams(window.location.search);
+            var userId = params.get('userId');
+            var returnLink = document.getElementById("returnLink");
+            returnLink.href = "../观测·Wiki/Wiki.html?userId=" + userId;
+            var returnLink2 = document.getElementById("returnLink2");
+            returnLink2.href = "../观测·Wiki/UserTeam.html?userId=" + userId;
+        });
+
+    });
+</script>
+
+</body>
+</html>

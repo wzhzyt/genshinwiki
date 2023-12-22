@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify UserTeam</title>
+    <script src="../js/jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="../观测·Wiki/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../观测·Wiki/font/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <style>
+        /* 在这里写入CSS代码 */
+        body {
+            background-image: url('../观测·Wiki/img/芙宁娜.jpg');
+            background-size: cover; /* 背景图片覆盖整个页面 */
+            background-repeat: no-repeat; /* 背景图片不重复 */
+            background-attachment: fixed; /* 背景图片固定，不随滚动条滚动 */
+            background-position: center center; /* 背景图片居中 */
+        }
+    </style>
+    <style>
+        /* 设置表单居中 */
+        #addCharacterForm {
+            text-align: center; /* 将文本居中 */
+            margin: 0 auto; /* 上下边距为0，左右自动，实现水平居中 */
+            width: fit-content; /* 调整宽度以适应内容 */
+        }
+        /* 为输入框和按钮设置一些样式，例如间距 */
+        #addCharacterForm input, #addCharacterForm button {
+            margin-bottom: 10px; /* 每个元素下方的间距 */
+            display: block; /* 每个元素占满整行 */
+        }
+    </style>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        .active {
+            background-color: #66574A;
+        }
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><a   id="returnLink" href="#">返回主站</a></li>
+    <li><a   id="returnLink2" href="#">返回队伍列表</a></li>
+</ul>
+<div id="mw-content-text1">
+    <form id="modifyCharacterForm" >
+        <input id="type" type="text"  list="typelist1" style='width:0px;height:0px ;background-color:transparent;border:0;'>
+        <span class="input input--jiro">
+            <input class="input__field input__field--jiro" type="text" id="input-10" name="TeamId"/>
+            <label class="input__label input__label--jiro" for="input-10">
+                <span class="input__label-content input__label-content--jiro">团队 ID"</span>
+            </label>
+        </span><br>
+        <input id="type" type="text"  list="typelist1" placeholder="成员 1" name="member1">
+        <datalist id="typelist1">
+
+        </datalist>
+        <input id="type" type="text" name="member2" list="typelist2" placeholder="成员 2">
+        <datalist id="typelist2">
+
+        </datalist>
+        <input id="type" type="text" name="member3" list="typelist3" placeholder="成员 3">
+        <datalist id="typelist3">
+
+        </datalist>
+        <input id="type" type="text" name="member4" list="typelist4" placeholder="成员 4">
+        <datalist id="typelist4">
+
+        </datalist>
+        <!-- 其他成员的输入框 -->
+        <button type="submit">修改队伍</button><br>
+    </form>
+    </form>
+</div>
+<script>
+
+    $(document).ready(function() {
+        // 获取 userId 参数
+        var params = new URLSearchParams(window.location.search);
+        var userId = params.get('userId');
+
+        // 检查 userId 是否存在
+        if (userId) {
+            // 发送 AJAX 请求到 UserTeamServlet
+            $.ajax({
+                url: '/GenshinWIKI_web_war_exploded/UserTeamServlet', // Servlet 的 URL
+                type: 'GET',
+                data: {UserId: userId}, // 将 userId 作为参数发送
+                success: function(teamList) {
+                    // 处理响应
+                    displayTeamTable(teamList);
+                },
+                error: function() {
+                    $('#teamListContainer').html('加载数据时发生错误。');
+                }
+            });
+        } else {
+            $('#teamListContainer').html('未提供 userId。');
+        }
+    });
+
+</script>
+<script src="js/classie.js"></script>
+<script>
+    (function() {
+        if (!String.prototype.trim) {
+            (function() {
+                // Make sure we trim BOM and NBSP
+                var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                String.prototype.trim = function() {
+                    return this.replace(rtrim, '');
+                };
+            })();
+        }
+
+        [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+            if( inputEl.value.trim() !== '' ) {
+                classie.add( inputEl.parentNode, 'input--filled' );
+            }
+
+            // events:
+            inputEl.addEventListener( 'focus', onInputFocus );
+            inputEl.addEventListener( 'blur', onInputBlur );
+        } );
+
+        function onInputFocus( ev ) {
+            classie.add( ev.target.parentNode, 'input--filled' );
+        }
+
+        function onInputBlur( ev ) {
+            if( ev.target.value.trim() === '' ) {
+                classie.remove( ev.target.parentNode, 'input--filled' );
+            }
+        }
+    })();
+</script>
+<script>
+    function getUserIdFromUrl() {
+        var params = new URLSearchParams(window.location.search);
+        return params.get('userId');
+    }
+    function updateUserCharacterList() {
+        var userId = getUserIdFromUrl();
+        console.log(userId);
+        $.ajax({
+            url: '/GenshinWIKI_web_war_exploded/UserCharacterServlet',
+            type: 'GET',
+            dataType: 'json',
+            data: {UserId: userId},
+            success: function(data) {
+                var typeList1 = $('#typelist1');
+                var typeList2 = $('#typelist2');
+                var typeList3 = $('#typelist3');
+                var typeList4 = $('#typelist4');
+                //typeList.empty(); // 清空现有选项
+                console.log(data);
+                data.forEach(function(character) {
+                    // 在datalist中添加每个角色名称作为选项
+                    console.log(character.characterId);
+                    typeList1.append('<option value="' + character.characterId + '">' + character.characterId + '</option>');
+                    typeList2.append('<option value="' + character.characterId + '">' + character.characterId + '</option>');
+                    typeList3.append('<option value="' + character.characterId + '">' + character.characterId + '</option>');
+                    typeList4.append('<option value="' + character.characterId + '">' + character.characterId + '</option>');
+                });
+            },
+            error: function(error) {
+                // Handle error if needed
+            }
+        });
+    }
+    var characterDict = {};
+    function fetchCharacterData() {
+        $.ajax({
+            url: '/GenshinWIKI_web_war_exploded/UserServlet', // 修改为正确的 URL
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                data.forEach(function(character) {
+                    characterDict[character.name] = character.id;
+                });
+            }
+        });
+    }
+    $(document).ready(function() {
+        updateUserCharacterList()
+        fetchCharacterData();
+        var params = new URLSearchParams(window.location.search);
+        var userId = params.get('userId');
+        var returnLink = document.getElementById("returnLink");
+        returnLink.href = "../观测·Wiki/Wiki.html?userId=" + userId;
+        var returnLink2 = document.getElementById("returnLink2");
+        returnLink2.href = "../观测·Wiki/UserTeam.html?userId=" + userId;
+        console.log('userId:', userId);
+        $('#modifyCharacterForm').on('submit', function(e) {
+            e.preventDefault();
+            var formDataArray = $(this).serializeArray();
+            formDataArray.forEach(function(field) {
+                // 根据输入框的 name 属性进行匹配和转换
+                if (field.name === 'member1' || field.name === 'member2' || field.name === 'member3' || field.name === 'member4') {
+                    field.value = characterDict[field.value] || field.value;
+                }
+            });
+            formDataArray.push({ name: "UserId", value: userId });
+            var formData = $.param(formDataArray); // 将数组转换为查询字符串
+            $.ajax({
+                url: '/GenshinWIKI_web_war_exploded/UserTeamServlet',
+                type: 'POST',
+                data: formData + '&action=modify_character',
+            }).always(function() {
+                // 无论成功或失败，都执行跳转
+                window.location.href = `UserTeam.html?userId=${userId}`;
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

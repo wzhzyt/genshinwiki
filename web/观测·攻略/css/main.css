@@ -1,0 +1,442 @@
+main {
+  padding-top: 226px;
+}
+.content-wrap {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.swiper {
+  margin-top: 30px;
+  padding: 0;
+  width: 840px;
+  height: 210px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.swiper {
+  --swiper-theme-color: white; /* 设置Swiper风格 */
+  --swiper-navigation-color: transparent; /* 单独设置按钮颜色 */
+  --swiper-navigation-size: 20px; /* 设置按钮大小 */
+}
+/* .swiper img{
+    border-radius: 8px;
+} */
+.prev,
+.next {
+  display: block;
+  width: 50px;
+  height: 50px;
+  top: 45%;
+  opacity: 0;
+  transition: all 0.3s;
+}
+.prev {
+  background: url(../img/index-left.png) center/cover no-repeat;
+}
+.next {
+  background: url(../img/index-right.png) center/cover no-repeat;
+}
+.swiper:hover .prev,
+.swiper:hover .next {
+  opacity: 1;
+}
+.swiper-pagination {
+  left: 44%;
+  padding-right: 0;
+  bottom: 12px;
+  text-align: center;
+}
+.swiper-pagination-bullet {
+  margin: 0 4px;
+  background-color: white;
+  opacity: 1;
+}
+.swiper-pagination .swiper-pagination-bullet-active {
+  width: 24px;
+  background: #b1968b;
+  border-radius: 5px;
+}
+
+/* 快速导航 */
+.shortcuts-wrap,
+.play-wrap {
+  display: inline-block;
+  background: #fff;
+  margin-top: 20px;
+  padding: 0 30px 38px;
+  width: 780px;
+  position: relative;
+  z-index: 20;
+  border-radius: 4px;
+}
+.shortcuts-wrap {
+  padding-bottom: 0px;
+}
+.play-wrap {
+  margin-top: 0px;
+}
+.shortcuts,
+.play {
+  width: 100%;
+  margin-top: 40px;
+}
+.icon-title {
+  margin-bottom: 12px;
+  min-height: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: bold;
+}
+h3,
+.more-right {
+  display: flex;
+  align-items: center;
+}
+.icon-title .main-right{
+  font-weight: 400;
+}
+/* 更多内容 */
+.more-right a {
+  position: relative;
+  margin-left: auto;
+  font-size: 11px;
+  padding-right: 11px;
+  background: url(../img/more-right.png) no-repeat right center;
+  background-size: auto 11px;
+  color: #b1968b;
+  font-weight: 400;
+}
+.icon-title img {
+  margin-right: 4px;
+  width: 28px;
+  height: 28px;
+  margin: 0 4px 0 -4px;
+}
+.shortcuts-content {
+  position: relative;
+  margin-right: -12px;
+}
+.shortcuts-content ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -20px;
+}
+.shortcuts-content li {
+  width: 186px !important;
+  margin-right: 12px;
+  margin-bottom: 20px;
+  transition: all 0.1s;
+  position: relative;
+}
+.shortcuts-content .img-wrap {
+  height: 48px;
+  width: 186px;
+  margin: 0 auto;
+  position: relative;
+}
+.shortcuts-content img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.shortcuts-content img:nth-of-type(2) {
+  z-index: -1;
+}
+/* 移入换图图片变大 */
+.shortcuts-content li:hover img:nth-of-type(1) {
+  opacity: 0;
+}
+.shortcuts-content li:hover img {
+  transform: scale(1.045, 1.045);
+}
+/* hot */
+.red-point {
+  position: absolute;
+  right: 10px;
+  top: -2px;
+  z-index: 1;
+  width: 10px;
+  height: 10px;
+}
+.red-point img {
+  width: 24px !important;
+  height: 14px !important;
+}
+/* 玩法探索 */
+
+.play-content {
+  display: flex;
+  overflow-x: auto;
+  margin: -20px -30px 0 0;
+  flex-wrap: wrap;
+}
+.play-content > li {
+  display: flex;
+  margin: 20px 20px 0 0;
+  /* 从右往左 */
+  flex-direction: row-reverse;
+  padding: 20px 20px 19px 48px;
+  width: 380px;
+  height: 184px;
+  background: url(../img/玩法探索背景图.png) center/cover no-repeat;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.play-content .background-img {
+  margin-right: 0;
+  width: 128px;
+  height: 128px;
+  border-radius: 20px;
+  border: 4px solid #faf9f8;
+  background-size: cover;
+  background-position: center center;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.activity-introduction {
+  padding-right: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
+.activity-introduction h4 {
+  line-height: 26px;
+  height: 26px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #986c5a;
+  display: flex;
+}
+.activity-introduction h4::after {
+  content: "";
+  transition: 0.3s;
+  width: 22px;
+  height: 22px;
+  background: url(../img/after-right.png) center/cover no-repeat;
+  margin-left: 18px;
+  margin-top: 2px;
+}
+.play-content>li:hover h4::after {
+  transform: translateX(10px);
+}
+
+.activity-introduction ol {
+  margin-top: 37px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.activity-introduction ol li {
+  margin-top: 12px;
+}
+
+.activity-introduction ol li:nth-of-type(1) {
+  margin-top: 0;
+}
+.activity-introduction li h5 {
+  display: flex;
+  height: 19px;
+  line-height: 19px;
+  font-size: 14px;
+  color: black;
+  font-weight: 450;
+}
+.activity-introduction li h5:hover {
+  color: #967c68;
+}
+.activity-introduction li h5::before {
+  content: "";
+  margin-top: -1px;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  background: url(../img/h5.png) center/cover no-repeat;
+}
+/* 右侧公告栏 */
+.main-right {
+  float: right;
+  width: 340px;
+  display: block;
+  position: sticky;
+  top:0;
+  background: none;
+}
+.announcement-wrap {
+  position: relative;
+  height: 210px;
+}
+.announcement {
+  height: 100%;
+  background: url(../img/广告栏背景图.png) center center no-repeat;
+  background-color: #fff;
+  border-radius: 8px;
+  background-size: 96% auto;
+  position: relative;
+}
+.announcement-title{
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  position: absolute;
+  top: 26px;
+  left: 0px;
+  box-sizing: border-box;
+}
+
+.announcement-content{
+  padding-right: 2%;
+  font-size: 14px;
+  position: absolute;
+  top: 46px;
+  bottom: 20px;
+  width: 86%;
+  left: 7%;
+  line-height: 1.36;
+  padding-top: 8px;
+  overflow-y: auto;
+  word-break: break-all;
+  height: auto;
+  box-sizing: border-box;
+}
+.announcement-content p{
+  white-space: pre-wrap;
+}
+/* 更多内容 */
+.read-more-btn{
+  margin-top: 20px;
+  width: 340px;
+  color:#f4d8a8;
+  font-size: 17px;
+  padding-left: 20px;
+  line-height: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: url(../img/更多内容-right箭头.png) 95% center no-repeat;
+  background-color: #2d2f33;
+  box-sizing: border-box;
+  background-size: 7px;
+  cursor: pointer;
+}
+/* 热门推荐 */
+.main-right>.right-module-wrap{
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+.hot-content{
+  margin-top: -10px;
+  margin-right: -10px;
+}
+/* 解决图片三像素问题 */
+.hot-content ul{
+  font-size: 0px;
+  padding-right: 10px;
+}
+.hot-content li{
+  margin: 10px 8px -2px 0;
+ float: left;
+ line-height: 40px;
+ height: 40px;
+ background: #f5f5f5;
+ font-size: 14px;
+}
+.hot-content li a{
+  padding:0 16px;
+  color: inherit;
+}
+.hot-content li:hover{
+  color: #967c68;
+}
+
+/* 最新内容 */
+.new-content li{
+  margin-top: 20px;
+}
+.new-content li:nth-of-type(1){
+  margin-top: 0px;
+}
+.new-content a{
+  display: flex;
+  flex-direction: row;
+  color: inherit;
+}
+
+.new-content .new-img{
+  width: 110px;
+  height: 61px;
+  background-size: cover;
+  background-color: rgba(0,0,0,0.2);;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+.new-content .right-introduction{
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1;
+}
+.right-introduction h5{
+  font-size: 14px;
+  line-height: 19px;
+  white-space: normal;
+  color: inherit;
+  font-weight: 400;
+  width: 100%;
+}
+.new-content li :hover>h5{
+  color: #967c68;
+}
+.new-content .detail{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  color: #737373;
+  margin-top: 7px;
+  align-items: center;
+}
+.new-content .detail>img{
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  margin-right: 4px;
+}
+.new-content .detail .time{
+  margin-left: auto;
+}
+/* 回到顶部 */
+.main-right .back-top{
+  width: 80px;
+  height: 80px;
+  background: white ;
+  border-radius: 4px;
+  font-size: 12px;
+  text-align: center;
+  color: #a6a6a6;
+  line-height: 14px;
+  margin-top: 20px;
+  padding-top: 9px;
+  box-sizing: border-box;
+  cursor: pointer;
+
+}
+.main-right .back-top img{
+  margin: 0 auto 3px;
+  display: block;
+  height: 40px;
+  width: 40px;
+}

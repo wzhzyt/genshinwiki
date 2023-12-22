@@ -1,0 +1,37 @@
+footer {
+  width: 1200px;
+  margin: 0 auto;
+}
+footer ul {
+  width: 840px;
+  margin-top: 30px;
+  padding: 20px 0;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  line-height: 16px;
+}
+
+footer ul li {
+  font-size: 13px;
+  box-sizing: border-box;
+  color: #4696db;
+  height: 19.25px;
+}
+footer li:nth-last-of-type(2)::after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 8px;
+  height: 8px;
+  margin: 0 9px;
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+  background: #f0f0f0;
+}
+footer ul li a{
+    vertical-align: middle;
+    color: inherit;
+
+}

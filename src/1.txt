@@ -1,0 +1,7 @@
+with teams as
+(select distinct userId, team.TeamId, member1, member2, member3, member4
+from UserTeam, Team, characters
+where UserTeam.TeamId = Team.TeamId and UserTeam.UserId = 10001)
+select TeamId, characters.name, characters.icon
+from teams, characters
+where teams.member1 = characters.id or teams.member2 = characters.id or teams.member3 = characters.id or teams.member4 = characters.id

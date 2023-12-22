@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅行者创作平台-观测枢-原神wiki</title>
+    <link data-n-head="ssr" rel="icon" type="image/x-icon" href="../观测·Wiki/img/favicon.ico">
+    <link rel="stylesheet" href="../清除默认格式/reset.css">
+    <!-- 引入轮播插件 -->
+    <link rel="stylesheet" href="./js/swiper/swiper/swiper-bundle.min.css" />
+    <!-- 引入轮播插件js -->
+    <script src="./js/swiper/swiper/swiper-bundle.min.js"></script>
+    <!-- 引入iconfont -->
+    <link rel="stylesheet" href="../观测·Wiki/font/iconfont.css">
+    <link rel="stylesheet" href="../观测·Wiki/css/background+header.css">
+    <link rel="stylesheet" href="../观测·Wiki/css/main-container.css">
+    <link rel="stylesheet" href="../观测·Wiki/css/footer.css">
+    <link rel="stylesheet" href="../观测·Wiki/css/login.css">
+
+</head>
+
+
+<body style="background-color: #EFF0F4;color: #333;" onload="countTime(),Time()">
+    <!-- 背景图部分 -->
+    <div class="background-images">
+        <div class="logo-wrap">
+            <img src="../观测·Wiki/img/原神logo.png" alt="">
+        </div>
+    </div>
+    <!-- 顶部导航栏 -->
+    <header class="clearfix" id="header">
+        <div class="header-content">
+            <div class="mhy-logo">
+                <a href="../index.jsp">
+                    <img src="../观测·Wiki/img/米哈游logo.png" alt="">
+                </a>
+            </div>
+            <a href="../index.jsp" class="mhy-title">米游社·原神</a>
+            <ul class="nav">
+                <li><a href="../观测·攻略/攻略.html">观测·攻略</a></li>
+                <li><a href="../观测·Wiki/Wiki.html">观测·Wiki</a></li>
+            </ul>
+            <div class="header-right">
+                <form action="" class="header-search">
+                    <input type="text" placeholder="搜索观测枢">
+                    <i class="iconfont icon-sousuo"></i>
+                </form>
+                <div class="header-user">
+                    <div class="user-wrap">
+                        <img src="../观测·Wiki/img/user.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- 内容主体 -->
+    <div class="main-container">
+        <main>
+            <div class="main-right">
+                <div class="announcement-wrap">
+                    <div class="announcement">
+                        <div class="announcement-title">
+                            公告栏
+                        </div>
+                        <div class="announcement-content">
+                            <p>原神观测枢是集攻略、资料库、试玩、同人为一体的玩家内容创作平台。目前观测枢wiki与攻略精选已上线。（Wiki站正在改版升级功能，如给旅行者带来不便请谅解）</p>
+                            <p><strong>站内所有攻略、词条均由旅行者编写，</strong>欢迎旅行者们加入原神wiki交流群②：（1072475442）一起参与wiki和攻略相关的交流和讨论。微信搜索公众号<strong>【原神观测枢】</strong>，更多精彩内容等着你哦~
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="read-more-btn">
+                    更多内容
+                </div>
+                <!-- 右侧通用外壳模板 限时祈愿 -->
+                <div class="right-module-wrap">
+                    <div class="icon-title">
+                        <h3>
+                            <img src="../观测·Wiki/img/限时祈愿-icon.png" alt="">
+                            <span>限时祈愿</span>
+                        </h3>
+                    </div>
+                    <!-- 右侧通用内容模板 限时祈愿 -->
+                    <div class="right-content-module">
+                        <ul class="pray-wrap">
+                            <li>
+                                <div class="pray-top clearfix">
+                                    <div class="pray-top-title">
+                                        <h2>「焰色天河」祈愿</h2>
+                                        <p>限定五星角色「宵宫」即将限时UP！</p>
+                                    </div>
+                                    <div class="pray-top-voice-wrap clearfix">
+                                        <img src="../观测·Wiki/img/宵宫voice.png" alt="">
+                                        <div class="pray-top-audio-wrap">
+                                            <div class="pray-top-audio">
+                                                <!-- 插入audio暂未实现 -->
+                                                <div class="pray-top-voice"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pray-bottom">
+                                    <a href="#"><img src="../观测·Wiki/img/宵宫证件照.png" alt=""></a>
+                                    <a href="#"><img src="../观测·Wiki/img/班尼特证件照.png" alt=""></a>
+                                    <a href="#"><img src="../观测·Wiki/img/辛焱证件照.png" alt=""></a>
+                                    <a href="#"><img src="../观测·Wiki/img/云堇证件照.png" alt=""></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pray-top clearfix">
+                                    <div class="pray-top-title">
+                                        <h2>「叶落风随」祈愿</h2>
+                                        <p class="timer">还有<span id="_d">00</span>天<span id="_h">00</span>小时<span
+                                                id="_m">00</span>分钟<span id="_s">00</span>秒
+                                        </p>
+                                    </div>
+                                    <div class="pray-top-voice-wrap clearfix">
+                                        <img src="../观测·Wiki/img/叶天帝voice.png" alt="">
+                                        <div class="pray-top-audio-wrap">
+                                            <div class="pray-top-audio">
+                                                <!-- 插入audio暂未实现 -->
+                                                <div class="pray-top-voice"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pray-bottom">
+                                    <a href="#"><img src="../观测·Wiki/img/叶天帝证件照.png" alt=""></a>
+                                    <a href="#"><img src="../观测·Wiki/img/小鹿证件照.png" alt=""></a>
+                                    <a href="#"><img src="../观测·Wiki/img/凝光证件照.png" alt=""></a>
+                                    <a href="#"><img src="../观测·Wiki/img/托马证件照.png" alt=""></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="pray-top clearfix">
+                                    <div class="pray-top-title">
+                                        <h2>「闪焰的驻足」祈愿</h2>
+                                        <p class="timer">还有<span id="_d2">00</span>天<span id="_h2">00</span>小时<span
+                                                id="_m2">00</span>分钟<span id="_s2">00</span>秒
+                                        </p>
+                                    </div>
+                                    <div class="pray-top-voice-wrap clearfix">
+                                        <img src="../观测·Wiki/img/可莉voice.png" alt="">
+                                        <div class="pray-top-audio-wrap">
+                                            <div class="pray-top-audio">
+                                                <!-- 插入audio暂未实现 -->
+                                                <div class="pray-top-voice"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pray-bottom">
+                                    <a href="#"><img src="../观测·Wiki/img/可莉证件照.png" alt=""></a>
+                                    <a href="#"><img src="../观测·Wiki/img/小鹿证件照.png" alt=""></a>
+                                    <a href="#"><img src="../观测·Wiki/img/凝光证件照.png" alt=""></a>
+                                    <a href="#"><img src="../观测·Wiki/img/托马证件照.png" alt=""></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="back-top" onclick="topFunction()">
+                    <img src="../观测·Wiki/img/回到顶部.png" alt="">
+                    返回顶部
+                </div>
+            </div>
+            <div class="swiper">
+                <ul class="swiper-wrapper">
+                    <li class="swiper-slide">
+                        <a href="">
+                            <img src="../观测·Wiki/img/banner1.png" alt="">
+                        </a>
+                    </li>
+                    <li class="swiper-slide">
+                        <a href="">
+                            <img src="../观测·Wiki/img/banner8.jpg" alt="">
+                        </a>
+                    </li>
+                    <li class="swiper-slide">
+                        <a href="">
+                            <img src="../观测·Wiki/img/banner9.png" alt="">
+                        </a>
+                    </li>
+                    <li class="swiper-slide">
+                        <a href="">
+                            <img src="../观测·Wiki/img/banner2.jpg" alt="">
+                        </a>
+                    </li>
+                    <li class="swiper-slide">
+                        <a href="">
+                            <img src="../观测·Wiki/img/banner3.png" alt="">
+                        </a>
+                    </li>
+                    <li class="swiper-slide">
+                        <a href="">
+                            <img src="../观测·Wiki/img/banner4.png" alt="">
+                        </a>
+                    </li>
+                    <li class="swiper-slide">
+                        <a href="">
+                            <img src="../观测·Wiki/img/banner5.png" alt="">
+                        </a>
+                    </li>
+                    <li class="swiper-slide">
+                        <a href="">
+                            <img src="../观测·Wiki/img/banner6.jpg" alt="">
+                        </a>
+                    </li>
+
+                    <!-- 如果需要分页器 -->
+                    <div class="swiper-pagination"></div>
+                    <!-- 如果需要导航按钮 -->
+                    <div class="swiper-button-prev prev"></div>
+                    <div class="swiper-button-next next"></div>
+                </ul>
+            </div>
+            <script>
+                var mySwiper = new Swiper(".swiper", {
+                    effect: 'fade',
+                    autoplay: true, //设置自动循环播放
+                    loop: true, // 循环模式选项
+                    // 如果需要分页器
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true, //配置点击切换效果
+                    },
+                    // 如果需要前进后退按钮
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                });
+            </script>
+            <div class="shortcuts-wrap">
+                <div class="shortcuts">
+                    <div class="icon-title">
+                        <h3>
+                            <img src="../观测·Wiki/img/icon快捷导航.png" alt="">
+                            <span>快捷导航</span>
+                        </h3>
+                    </div>
+                    <div class="shortcuts-content">
+                        <ul>
+                            <li>
+                                <a href="">
+                                    <div class="img-wrap">
+                                        <img src="../观测·Wiki/img/地图工具1.png" alt="">
+                                        <img src="../观测·Wiki/img/地图工具2.png" alt="">
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" id="userTeamLink">
+                                    <div class="img-wrap">
+                                        <img src="../观测·Wiki/img/攻略站1.png" alt="">
+                                        <img src="../观测·Wiki/img/攻略站2.png" alt="">
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#" id="characterlistLink">
+                                    <div class="img-wrap">
+                                        <img src="../观测·Wiki/img/角色图鉴1.png" alt="">
+                                        <img src="../观测·Wiki/img/角色图鉴2.png" alt="">
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <div class="img-wrap">
+                                        <img src="../观测·Wiki/img/武器图鉴1.png" alt="">
+                                        <img src="../观测·Wiki/img/武器图鉴2.png" alt="">
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="calender-wrap">
+                <div class="calender">
+                    <div class="icon-title">
+                        <h3>
+                            <img src="../观测·Wiki/img/日历.png" alt="">
+                            <span>日历</span>
+                        </h3>
+                        <div class="more-right">
+                            <a href=""><span>更多内容</span></a>
+                        </div>
+                    </div>
+                    <div class="calender-content">
+                        <div class="calender-top">
+                            <div class="calender-top-today">
+                                <img src="../观测·Wiki/img/calender-icon.png" alt="">2022年7月29日 星期五
+                            </div>
+                            <div class="cal">
+                                <ul class="calender-time">
+                                    <li class="month">8月</li>
+                                    <li>
+                                        <div class="day">一</div>
+                                        <div class="date">1</div>
+                                    </li>
+                                    <li>
+                                        <div class="day">二</div>
+                                        <div class="date">2</div>
+                                    </li>
+                                    <li>
+                                        <div class="day">三</div>
+                                        <div class="date">3</div>
+                                    </li>
+                                    <li>
+                                        <div class="day">四</div>
+                                        <div class="date">4</div>
+                                    </li>
+                                    <li>
+                                        <div class="day">五</div>
+                                        <div class="date">5</div>
+                                    </li>
+                                    <li>
+                                        <div class="day">六</div>
+                                        <div class="date">6</div>
+                                    </li>
+                                    <li>
+                                        <div class="day">日</div>
+                                        <div class="date">7</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="calender-bottom">
+                            <ul>
+                                <li>
+                                    <div class="cal-left">天赋培养</div>
+                                    <div class="cal-right">
+                                        <div class="cal-prev"></div>
+                                        <div class="cal-ID-Photo-wrap">
+                                            <ol class="cal-ID-Photo" id="cal-ID-Photo1">
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/神子证件照.jpg" alt="">
+                                                        <div class="name">八重神子</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/啊影证件照.png" alt="">
+                                                        <div class="name">啊影</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        <img src="../观测·Wiki/img/钟离证件照.png" alt="">
+                                                        <div class="name">钟离</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/巴巴托斯证件照.png" alt="">
+                                                        <div class="name">巴巴托斯</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/阿贝多证件照.png" alt="">
+                                                        <div class="name">阿贝多</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/五郎证件照.png" alt="">
+                                                        <div class="name">五郎</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/早柚证件照.png" alt="">
+                                                        <div class="name">早柚</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/行秋证件照.png" alt="">
+                                                        <div class="name">二小姐</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/皇女证件照.png" alt="">
+                                                        <div class="name">皇女</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/烟绯证件照.png" alt="">
+                                                        <div class="name">烟绯</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/班尼特证件照.png" alt="">
+                                                        <div class="name">班尼特</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/辛焱证件照.png" alt="">
+                                                        <div class="name">辛焱</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        <img src="../观测·Wiki/img/云堇证件照.png" alt="">
+                                                        <div class="name">云堇</div>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                        <div class="cal-next"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="cal-left">武器突破</div>
+                                    <div class="cal-right">
+                                        <div class="cal-prev"></div>
+                                        <div class="cal-ID-Photo-wrap">
+                                            <ol class="cal-ID-Photo" id="cal-ID-Photo2">
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/神乐之真意.png" alt="">
+                                                        <div class="name">神乐之真意</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/阿莫斯.png" alt="">
+                                                        <div class="name">阿莫斯之弓</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="">
+                                                        <img src="../观测·Wiki/img/苍古自由之誓.png" alt="">
+                                                        <div class="name">苍古自由之誓</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/薙草之稻光.png" alt="">
+                                                        <div class="name">薙草之稻光</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/护摩之杖.png" alt="">
+                                                        <div class="name">护摩之杖</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/冬极白星.png" alt="">
+                                                        <div class="name">冬极白星</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/尘世之锁.png" alt="">
+                                                        <div class="name">尘世之锁</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/天空之脊.png" alt="">
+                                                        <div class="name">天空之脊</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/狼的末路.png" alt="">
+                                                        <div class="name">狼的末路</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/若水.png" alt="">
+                                                        <div class="name">若水</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/雾切之回光.png" alt="">
+                                                        <div class="name">雾切之回光</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/不灭月华.png" alt="">
+                                                        <div class="name">不灭月华</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/松籁响起之时.png" alt="">
+                                                        <div class="name">松籁响起之时</div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <img src="../观测·Wiki/img/和璞鸢.png" alt="">
+                                                        <div class="name">和璞鸢</div>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                        <div class="cal-next"></div>
+                                    </div>
+                                </li>
+                                <li style="height: auto;">
+                                    <div class="cal-left">限时活动</div>
+                                    <ol class="activity">
+                                        <li>
+                                            <a href="">
+                                                <img src="../观测·Wiki/img/远海诗夏游记.png" alt="">
+                                                <div class="introduce">
+                                                    <div class="title">「远海诗夏游纪」活动</div>
+                                                    <div class="time">2022.07.15 10:00 - 2022.08.23 23:59</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <img src="../观测·Wiki/img/幻影留声.png" alt="">
+                                                <div class="introduce">
+                                                    <div class="title">「幻声留形」活动</div>
+                                                    <div class="time">2022.07.15 10:00 - 2022.08.23 23:59</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="">
+                                                <img src="../观测·Wiki/img/残像暗战.png" alt="">
+                                                <div class="introduce">
+                                                    <div class="title">「残像暗战」活动</div>
+                                                    <div class="time">2022.07.15 10:00 - 2022.08.23 23:59</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <ul class="clearfix">
+                <li><a href="#">申请观测枢编辑</a></li>
+                <li><a href="#">关于观测枢</a></li>
+            </ul>
+        </footer>
+    </div>
+    <div class="login-background-wrap">
+        <div class="login-background">
+            <div class="login-wrap">
+                <div class="move"></div>
+                <img src="../观测·Wiki/img/米哈游logo.png" alt="" class="login-mhy-logo">
+                <img src="../观测·Wiki/img/fork.png" alt="" class="fork">
+                <div class="title">
+                    <div class="tab-item "><span>密码登录</span></div>
+                </div>
+                <div class="form">
+                    <div class="input-wrap">
+                        <div class="input-container">
+                            <input type="tel" placeholder="Uid/登录">
+                        </div>
+                    </div>
+                    <!-- 提示信息 -->
+                    <p class="reminder"></p>
+                    <div class="input-wrap">
+                        <div class="input-container">
+                            <input type="tel" placeholder="密码">
+                            <div class="auth-code-btn">
+                                忘记密码
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 提示信息 -->
+                    <p class="reminder"></p>
+                    <div class="buttom-wrap">
+                        <button class="login-btn" type="submit">登 录</button>
+                    </div>
+                </div>
+                <div class="Registration">
+                    <a href="#">登录遇到问题？</a>
+                    <a href="#" class="to-right">立即注册</a>
+                </div>
+                <p class="login-tip">
+                    <span>未注册的手机验证后将自动登录。注册/登录即代表您同意并遵守</span>
+                    <a href="">《米哈游通行证用户服务协议》</a>
+                    <a href="">《米哈游通行证用户个人信息及隐私保护政策》</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 获取查询参数
+        var params = new URLSearchParams(window.location.search);
+        var userId = params.get('userId');
+        // 在控制台中打印 userId
+        console.log(userId);
+        // 这里可以进行其他处理
+        if (userId) {
+            var userTeamLink = document.getElementById('userTeamLink');
+            userTeamLink.href = `UserTeam.html?userId=${userId}`;
+            var characterlistLink = document.getElementById('characterlistLink');
+            characterlistLink.href = `characters.html?userId=${userId}`;
+        }else{
+            var userTeamLink = document.getElementById('userTeamLink');
+            userTeamLink.href = `UserTeam.html`;
+            var characterlistLink = document.getElementById('characterlistLink');
+            characterlistLink.href = `characters.html`;
+        }
+    </script>
+    <script src="../观测·Wiki/js/Wiki.js/倒计时1.js"></script>
+    <script src="../观测·Wiki/js/Wiki.js/倒计时2.js"></script>
+    <script src="../观测·Wiki/js/Wiki.js/top.nav.js"></script>
+    <script src="../观测·Wiki/js/Wiki.js/backtop.js"></script>
+    <script src="../观测·Wiki/js/Wiki.js/prevnext.js"></script>
+    <script src="../观测·Wiki/js/Wiki.js/login.js"></script>
+</body>
+
+</html>
